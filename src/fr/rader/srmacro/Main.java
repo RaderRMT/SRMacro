@@ -1,5 +1,7 @@
 package fr.rader.srmacro;
 
+import fr.rader.srmacro.inputs.Keyboard;
+
 import java.awt.*;
 
 public class Main {
@@ -9,7 +11,8 @@ public class Main {
     private Robot robot;
 
     private void start() {
-
+        Keyboard keyboard = new Keyboard(robot);
+        keyboard.write("Hello, World!");
     }
 
     public static void main(String[] args) {

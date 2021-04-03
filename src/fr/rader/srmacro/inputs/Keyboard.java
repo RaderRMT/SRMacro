@@ -16,8 +16,6 @@ public class Keyboard {
     }
 
     public void write(String string) {
-        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
-
         for(char character : string.toCharArray()) {
             boolean isUpperCase = Character.isUpperCase(character);
 
@@ -33,7 +31,6 @@ public class Keyboard {
      * @param duration The duration of the hold (in milliseconds)
      */
     public void hold(char character, int duration) {
-        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
         if(duration < 0) throw new IllegalArgumentException("duration must be a positive number");
 
         int keyCode = validateCharacter(character);
@@ -70,8 +67,6 @@ public class Keyboard {
      * @param keyCode Key code of the key to write.
      */
     public void write(int keyCode) {
-        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
-
         robot.keyPress(keyCode);
         robot.keyRelease(keyCode);
     }
