@@ -1,23 +1,29 @@
-package fr.rader.srmacro;
+package fr.rader.srmacro.inputs;
+
+import fr.rader.srmacro.exceptions.NoRobotException;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Keyboard {
 
-    private static Robot keyboardRobot;
+    private Robot robot;
 
-    private static boolean isHolding = false;
+    private boolean isHolding = false;
 
-    public static void write(String string) {
-        if(keyboardRobot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
+    public Keyboard(Robot robot) {
+        this.robot = robot;
+    }
+
+    public void write(String string) {
+        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
 
         for(char character : string.toCharArray()) {
             boolean isUpperCase = Character.isUpperCase(character);
 
-            if(isUpperCase) keyboardRobot.keyPress(KeyEvent.VK_SHIFT);
+            if(isUpperCase) robot.keyPress(KeyEvent.VK_SHIFT);
             write(validateCharacter(character));
-            if(isUpperCase) keyboardRobot.keyRelease(KeyEvent.VK_SHIFT);
+            if(isUpperCase) robot.keyRelease(KeyEvent.VK_SHIFT);
         }
     }
 
@@ -26,8 +32,8 @@ public class Keyboard {
      * @param character The character to hold
      * @param duration The duration of the hold (in milliseconds)
      */
-    public static void hold(char character, int duration) {
-        if(keyboardRobot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
+    public void hold(char character, int duration) {
+        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
         if(duration < 0) throw new IllegalArgumentException("duration must be a positive number");
 
         int keyCode = validateCharacter(character);
@@ -35,11 +41,11 @@ public class Keyboard {
         isHolding = true;
         Thread thread = new Thread(() -> {
             try {
-                keyboardRobot.keyPress(keyCode);
+                robot.keyPress(keyCode);
                 Thread.sleep(500);
 
                 while(isHolding) {
-                    keyboardRobot.keyPress(keyCode);
+                    robot.keyPress(keyCode);
 
                     Thread.sleep(20);
                 }
@@ -55,7 +61,7 @@ public class Keyboard {
             e.printStackTrace();
         }
 
-        keyboardRobot.keyRelease(keyCode);
+        robot.keyRelease(keyCode);
         isHolding = false;
     }
 
@@ -63,11 +69,11 @@ public class Keyboard {
      * Write a key based on it's key code
      * @param keyCode Key code of the key to write.
      */
-    public static void write(int keyCode) {
-        if(keyboardRobot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
+    public void write(int keyCode) {
+        if(robot == null) throw new NoRobotException("Please use Keyboard#setRobot before using this function!");
 
-        keyboardRobot.keyPress(keyCode);
-        keyboardRobot.keyRelease(keyCode);
+        robot.keyPress(keyCode);
+        robot.keyRelease(keyCode);
     }
 
     private static int validateCharacter(char character) {
@@ -77,9 +83,5 @@ public class Keyboard {
         }
 
         return keyCode;
-    }
-
-    public static void setRobot(Robot robot) {
-        keyboardRobot = robot;
     }
 }

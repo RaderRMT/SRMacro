@@ -1,4 +1,4 @@
-package fr.rader.srmacro;
+package fr.rader.srmacro.exceptions;
 
 public class NoRobotException extends RuntimeException {
     

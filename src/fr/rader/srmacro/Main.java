@@ -9,9 +9,7 @@ public class Main {
     private Robot robot;
 
     private void start() {
-        Mouse.setRobot(robot);
-        Mouse.press(Mouse.LEFT_BUTTON);
-        Mouse.release(Mouse.LEFT_BUTTON);
+
     }
 
     public static void main(String[] args) {
