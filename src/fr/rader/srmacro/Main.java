@@ -1,8 +1,10 @@
 package fr.rader.srmacro;
 
-import fr.rader.srmacro.inputs.Keyboard;
+import fr.rader.srmacro.reader.MacroReader;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
 
@@ -11,8 +13,15 @@ public class Main {
     private Robot robot;
 
     private void start() {
-        Keyboard keyboard = new Keyboard(robot);
-        keyboard.write("Hello, World!");
+        File file = IO.openFilePrompt("t", null, ".txt");
+
+        MacroReader reader = new MacroReader(file, robot);
+
+        try {
+            reader.startMacro();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package fr.rader.srmacro.inputs;
 
-import fr.rader.srmacro.exceptions.NoRobotException;
-
 import java.awt.*;
 import java.awt.event.InputEvent;
 
