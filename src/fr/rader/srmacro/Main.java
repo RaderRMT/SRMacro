@@ -1,7 +1,5 @@
 package fr.rader.srmacro;
 
-import fr.rader.srmacro.reader.MacroReader;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;

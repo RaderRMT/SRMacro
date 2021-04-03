@@ -1,4 +1,4 @@
-package fr.rader.srmacro.reader;
+package fr.rader.srmacro;
 
 import fr.rader.srmacro.inputs.Keyboard;
 import fr.rader.srmacro.inputs.Mouse;
@@ -49,6 +49,7 @@ public class MacroReader {
                     }
                 }
 
+                doCommandList.clear();
                 continue;
             }
 
@@ -73,6 +74,9 @@ public class MacroReader {
                 switch(commandWithExecution[1].toLowerCase()) {
                     case "write":
                         keyboard.write(command[1]);
+                        break;
+                    case "writeln":
+                        keyboard.write("\n");
                         break;
                     case "press":
                         keyboard.write(commandWithExecution[2]);
