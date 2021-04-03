@@ -33,6 +33,7 @@ public class MacroReader {
             line = line.trim();
 
             if(line.isEmpty()) continue;
+            if(line.startsWith("//")) continue;
 
             if(line.startsWith("do")) {
                 repeat = Integer.parseInt(line.split(" ")[1]);
@@ -40,7 +41,7 @@ public class MacroReader {
                 continue;
             }
 
-            if(line.equals("}")) {
+            if(line.equals(";")) {
                 isDo = false;
 
                 for(int i = 0; i < repeat; i++) {
@@ -76,7 +77,7 @@ public class MacroReader {
                         keyboard.write(command[1]);
                         break;
                     case "writeln":
-                        keyboard.write("\n");
+                        keyboard.write(command[1] + "\n");
                         break;
                     case "press":
                         keyboard.write(commandWithExecution[2]);

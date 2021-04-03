@@ -11,7 +11,7 @@ public class Main {
     private Robot robot;
 
     private void start() {
-        File file = IO.openFilePrompt("t", null, ".txt");
+        File file = IO.openFilePrompt("Macro file", null, ".txt");
 
         MacroReader reader = new MacroReader(file, robot);
 
